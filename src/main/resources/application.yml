@@ -1,0 +1,35 @@
+server:
+  port: 50001
+
+spring:
+  application:
+    name: event-kafka-service
+  kafka:
+    bootstrap-servers: 172.30.1.193:9092
+    source-topic: sourceTopic
+    target-topic: dirtyData
+    send-times: 10
+    producer:
+      retries: 1
+      batch-size: 1000
+      buffer-memory: 335544332
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: eventKafkaTesterGroup
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+springfox:
+  documentation:
+    header: 消息测试服务
+    swagger:
+      v2:
+        path: /api-docs
+
+logging:
+  level:
+    root: info
